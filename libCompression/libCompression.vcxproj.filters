@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\bzip2">
+      <UniqueIdentifier>{dcf3ae63-a16d-4380-8738-c62923d4c1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bzip2">
+      <UniqueIdentifier>{ad2b3dd8-9495-487f-87dd-47ae2953389c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Tar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bzip2\bzlib.h">
+      <Filter>Header Files\bzip2</Filter>
+    </ClInclude>
+    <ClInclude Include="bzip2\bzlib_private.h">
+      <Filter>Header Files\bzip2</Filter>
+    </ClInclude>
+    <ClInclude Include="Compression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TarHeader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2\blocksort.c">
+      <Filter>Source Files\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2\bzlib.c">
+      <Filter>Source Files\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2\decompress.c">
+      <Filter>Source Files\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2\huffman.c">
+      <Filter>Source Files\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2\randtable.c">
+      <Filter>Source Files\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2\compress.c">
+      <Filter>Source Files\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="bzip2\crctable.c">
+      <Filter>Source Files\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="Compression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

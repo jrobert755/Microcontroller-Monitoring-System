@@ -1,0 +1,11 @@
+libCompressionFiles = libCompression/*.cpp libCompression/*.h libCompression/bzip2/*
+libFileHandlerFiles = libFileHandler/*.cpp libFileHandler/*.h
+libMMSFiles = libMMS/*.cpp libMMS/*.h
+libSettingsFiles = libSettings/*.cpp libSettings/*.h
+libSerialFiles = libSerial/*.cpp libSerial/*.h
+
+subDirlibCompressionFiles = $(addprefix ../,$(libCompressionFiles))
+subDirlibFileHandlerFiles = $(addprefix ../,$(libFileHandlerFiles))
+subDirlibMMSFiles = $(addprefix ../,$(libMMSFiles))
+subDirlibSettingsFiles = $(addprefix ../,$(libSettingsFiles))
+subDirlibSerialFiles = $(addprefix ../, $(libSerialFiles))

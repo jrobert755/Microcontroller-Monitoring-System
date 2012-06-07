@@ -1,0 +1,5 @@
+begin global
+pinsToUpdate = 5
+keepAliveTime = 10
+nextPinReading = 60
+end

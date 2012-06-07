@@ -1,0 +1,7 @@
+-Clean up all of the allocated memory in MainListener
+	(Listeners.h)
+-Clean up all connections after exiting server loop
+	(MMSServer.cpp)
+-Move all code implementations that can be to .cpp files
+-Move the read code for reading in raw data from a socket
+	from the listener to the server loop(?)

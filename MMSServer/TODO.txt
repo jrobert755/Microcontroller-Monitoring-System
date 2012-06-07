@@ -1,0 +1,4 @@
+-Insert new reading according to pin, then time of reading
+	(Arduino::addReadingToFile,Arduino.cpp)
+-Figure out why it errors out when Ctrl-C and then restarting in same window
+	(binding issue?)
