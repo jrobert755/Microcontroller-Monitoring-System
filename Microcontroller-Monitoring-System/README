@@ -1,0 +1,42 @@
+Microcontroller-Monitoring-System
+=================================
+
+Licenses:
+	The packages in this folder use a combination of
+	the GNU General Public License v3, GNU General
+	Public License v2, GNU Lesser General Public 
+	License, and others. See COPYING, COPYING.2,
+	COPYING.LESSER, and BZIP2LICENSE for the licenses.
+
+Pacakges:
+	Arduino Internet Connector: A program to translate
+		serial messages from an arduino to a server on
+		the internet. Licensed under GNU General Public
+		License v3. Uses libSerial and libMMS, licensed
+		under GNU General Public License v2 and GNU
+		Lesser General Public License.
+	libCompression: A library for the creation of .tar
+		files and the compression of files and/or
+		character arrays. Uses the bzip2 library, which
+		is licensed under the BZip2 license (see
+		BZIP2LICENSE). libCompression is licensed under
+		GNU Lesser General Public License.
+	libFileHandler: A library for the cross platform
+		handling of files and folders/directories. 
+		libFileHandler is licensed under the GNU Lesser
+		General Public License.
+	libMMS: A library for communicating with
+		microcontrollers or any device using the same
+		protocol over a network. Licensed under the GNU
+		Lesser General Public License.
+	libSerial: A library for Linux systems to use
+		serial communication in a C++ program using
+		iostreams. Maintained and developed by 
+		crayzeewulf and wedesoft 
+        (http://sourceforge.net/projects/libserial/)
+		and licensed under GNU General Public License
+		v2.
+	libSettings: A library for opening a specially
+		formatted settings file and breaking it down
+		line by line. libSettings is licensed under
+		GNU Lesser General Public License.
