@@ -1,9 +1,9 @@
 MicrocontrollerMonitoringSystem
 ===============================
-Portions of this software are licensed under GNU Public License
-and the Lesser GNU Public License. Please see the corresponding
-subfolders for license information. Items not created by me,
-Jean-Luc Roberts:
+Portions of this software are licensed under GNU General Public License
+and the GNU Lesser General Public License. Please see the corresponding
+subfolders for license information. Items not created by me, Jean-Luc 
+Roberts:
 bzip2 - developed and maintained by Julian Seward 
         (http://www.bzip.org/)
 libSerial - developed and maintained by crayzeewulf and wedesoft 
