@@ -16,7 +16,7 @@ export CFLAGS
 #DEPENDENCIESALL = Release/libCompression.a Release/libFileHandler.a \
 #				Release/libMMS.a Release/libSettings.a
 DEPENDENCIESALL = $(addprefix $(DIR)/,libCompression.a \
-				libFileHandler.a libMMS.a libSettings.a)
+				libFileHandler.a libjwsmtp.a libMMS.a libSettings.a)
 
 all: MMSServer ArduinoInternetConnector
 
@@ -31,27 +31,27 @@ $(DEPENDENCIESALL): | $(DIR)
 $(DIR):
 	mkdir -p $(DIR)
 	
-$(DIR)/MMSServer: $(DEPENDENCIESALL);
-	make -C MMSServer
+$(DIR)/MMSServer: $(DEPENDENCIESALL) MMSServer/*.cpp MMSServer/*.h;
+	$(MAKE) -C MMSServer
 
-$(DIR)/ArduinoInternetConnector: $(DEPENDENCIESALL) $(DIR)/libSerial.a;
-	make -C ArduinoInternetConnector
+$(DIR)/ArduinoInternetConnector: $(DEPENDENCIESALL) $(AICDEPENDENCIES)
+	$(MAKE) -C ArduinoInternetConnector
 
 $(DIR)/libCompression.a: $(libCompressionFiles); 
-	make -C libCompression
+	$(MAKE) -C libCompression
 	
 $(DIR)/libFileHandler.a: $(libFileHandlerFiles); 
-	make -C libFileHandler
+	$(MAKE) -C libFileHandler
+	
+$(DIR)/libjwsmtp.a: $(libjwsmtpFiles);
+	$(MAKE) -C libjwsmtp
 	
 $(DIR)/libMMS.a: $(libMMSFiles);
-	make -C libMMS
+	$(MAKE) -C libMMS
 	
 $(DIR)/libSettings.a: $(libSettingsFiles)
-	make -C libSettings
-	
-$(DIR)/libSerial.a: $(libSerialFiles)
-	make -C libSerial
-	
+	$(MAKE) -C libSettings
+
 DELETEDIR = false
 ifeq ($(DELETEDIR), false)
 clean: cleanwodir

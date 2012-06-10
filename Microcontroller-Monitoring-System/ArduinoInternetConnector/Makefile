@@ -1,7 +1,7 @@
 include ../MakefileIncludes/*
 
-DEPENDENCIES = $(subDirlibMMSFiles) $(subDirlibSerialFiles)
+DEPENDENCIES = $(subDirlibMMSFiles)
 
 ../$(DIR)/ArduinoInternetConnector: *.cpp $(DEPENDENCIES)
-	g++ -Wall -I../libSerial -I../libMMS *.cpp -L../$(DIR) -lMMS -lSerial -o ../$(DIR)/ArduinoInternetConnector
+	g++ $(CFLAGS) -pthread  -I../libMMS *.cpp -L../$(DIR) -lMMS -o ../$(DIR)/ArduinoInternetConnector
 	

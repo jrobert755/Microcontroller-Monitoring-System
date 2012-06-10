@@ -93,6 +93,7 @@ bool MainListener::onReadEvent(MMSReadEvent readEvent){
 			for(size = 0; size < completed_message.size(); size++){
 				if(completed_message[size] == ' ') break;
 			}
+			
 
 			string function_name = string((char*)(&completed_message[0]), size);
 			string parameters = "";
@@ -121,7 +122,7 @@ bool MainListener::onReadEvent(MMSReadEvent readEvent){
 			map<string, list<MessageHandler> >::iterator message_iter = m_message_handlers.find(function_name);
 
 			if(message_iter == m_message_handlers.end()){
-				string temporary = function_name + " " + parameters;
+				//string temporary = function_name + " " + parameters;
 				m_default_handler(connection_message, connection);
 			} else{
 				for(list<MessageHandler>::iterator handler_iter = message_iter->second.begin(); handler_iter != message_iter->second.end(); handler_iter++){

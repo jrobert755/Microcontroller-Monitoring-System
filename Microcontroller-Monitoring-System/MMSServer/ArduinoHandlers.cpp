@@ -91,6 +91,7 @@ bool handleArduinoDisconnection(MMSConnection* connection, string port){
 	for(map<string, Arduino*>::iterator iter = known_arduinos.begin(); iter != known_arduinos.end(); iter++){
 		if(iter->second->getConnection()->getSocket() == connection->getSocket()){
 			iter->second->setConnected(false);
+			if(computers == NULL || computers->size() == 0) break;
 			string to_send = "disconnectedArduino ";
 			to_send += iter->first;
 			vector<byte> to_send_vector;

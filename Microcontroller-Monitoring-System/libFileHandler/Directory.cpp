@@ -51,7 +51,7 @@ Directory::Directory(){
 	m_name = "";
 }
 
-Directory::Directory(string full_path, string specific_files){
+Directory::Directory(string& full_path, string specific_files){
 #ifdef _WIN32
 	char* full_path_name = new char[MAX_PATH];
 	strcpy_s(full_path_name, MAX_PATH, full_path.c_str());
@@ -106,7 +106,7 @@ Directory::Directory(string full_path, string specific_files){
 				//m_files.insert(pair<string, File*>(str_file_name, new_file));
 				m_files.insert(pair<string, File*>(short_name, new_file));
 			} catch(int e){
-				cout << "Error creating new file: " << e << endl;
+				cout << "Error creating new file: " << str_file_name << endl;
 			}
 		}
 		delete[] file_name;
@@ -120,9 +120,13 @@ Directory::Directory(string full_path, string specific_files){
 #else
 	//#error Linux code not supported
 	char* full_path_name = new char[512];
-	strcpy_s(full_path_name, 511, full_path.c_str());
+	/*strcpy_s(full_path_name, 511, full_path.c_str());
 	if(full_path_name[strlen(full_path_name)-1] != '/'){
 		strcat_s(full_path_name, 511, "/");
+	}*/
+	strcpy(full_path_name, full_path.c_str());
+	if(full_path_name[strlen(full_path_name)-1] != '/'){
+		strcat(full_path_name, "/");
 	}
 	DIR* directory_info = opendir(full_path_name);
 	struct dirent* info;
@@ -135,12 +139,12 @@ Directory::Directory(string full_path, string specific_files){
 		}
 		if(full_path_name[0] != '.'){
 			char* temp = new char[256];
-			strcpy_s(temp, 256, full_path.c_str());
+			strcpy(temp, full_path.c_str());
 			if(temp[strlen(temp)-1] != '/'){
-				strcat_s(temp, 256, "/");
+				strcat(temp, "/");
 			}
-			strcat_s(temp, 256, file_name);
-			strcpy_s(file_name, 256, temp);
+			strcat(temp, file_name);
+			strcpy(file_name, temp);
 			delete[] temp;
 		}
 		int is_directory = isDirectory(file_name);
@@ -167,7 +171,7 @@ Directory::Directory(string full_path, string specific_files){
 				//m_files.insert(pair<string, File*>(str_file_name, new_file));
 				m_files.insert(pair<string, File*>(short_name, new_file));
 			} catch(int e){
-				cout << "Error creating new file: " << e << endl;
+				cout << "Error creating new file: " << str_file_name << endl;
 			}
 		}
 		delete[] file_name;

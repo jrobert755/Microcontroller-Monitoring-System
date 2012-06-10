@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include "Arduino.h"
 #include "Handlers.h"
+#include "Watchdog.h"
 #include <Settings.h>
 #include <Tar.h>
 #include <Compression.h>
@@ -121,7 +122,7 @@ int main(int argc, char* argv[]){
 	uintptr_t arduino_thread = _beginthreadex(NULL, 0, processThread, (void*)arduino_thread_arguments, 0, NULL);
 #else
 	//REDO THIS TO UPDATE IT!!!!
-	pthread_t arduino_thread, computer_thread;
+	pthread_t arduino_thread, computer_thread, watchdog_thread;
 	ProcessArguments* computer_thread_arguments = new ProcessArguments();
 	computer_thread_arguments->port = "2567";
 	computer_thread_arguments->server = server;
@@ -137,7 +138,13 @@ int main(int argc, char* argv[]){
 		pthread_join(computer_thread, NULL);
 		return -1;
 	}
+	if(pthread_create(&watchdog_thread, NULL, watchdogThread, (void*)server) != 0){
+		pthread_join(computer_thread, NULL);
+		pthread_join(arduino_thread, NULL);
+		return -1;
+	}
 #endif
+	server->setRunning(false);
 
 #ifdef _WIN32
 	WaitForSingleObject((HANDLE)arduino_thread, INFINITE);
@@ -147,6 +154,7 @@ int main(int argc, char* argv[]){
 #else
 	pthread_join(arduino_thread, NULL);
 	pthread_join(computer_thread, NULL);
+	pthread_join(watchdog_thread, NULL);
 #endif
 
 #ifdef _WIN32

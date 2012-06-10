@@ -50,6 +50,10 @@ public:
 	void setRunning(bool running){
 		this->running = running;
 	}
+	
+	bool isRunning(){
+		return running;
+	}
 private:
 	map<string, map<SOCKET, MMSConnection*>*> m_connections;
 	set<string> m_ports;

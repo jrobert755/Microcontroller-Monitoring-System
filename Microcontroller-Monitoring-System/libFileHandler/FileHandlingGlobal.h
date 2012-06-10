@@ -109,7 +109,7 @@ private:
 
 class Directory{
 public:
-	Directory(string full_path, string specific_files);
+	Directory(string& full_path, string specific_files);
 	Directory(const Directory& copy);
 	~Directory();
 

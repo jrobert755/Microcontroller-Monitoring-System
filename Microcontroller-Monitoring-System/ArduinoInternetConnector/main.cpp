@@ -1,44 +1,34 @@
-/* Arduino Internet Connector
- * Copyright 2012 Jean-Luc Roberts
- *
- * This file is part of the Aruino Internet Connector package.
- *
- * The Arduino Internet Connector is free software: you can redistribute 
- * it and/or modify it under the terms of the GNU General Public License 
- * as published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * The Arduino Internet Connector is distributed in the hope that it will 
- * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
- * General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with the Arduino Internet Connector. If not, see 
- * <http://www.gnu.org/licenses/>.
- *
- * This program uses the libraries libSerial and libMMS, which are
- * licensed under the terms of the GNU General Public License v2.0 and
- * the GNU Lesser Public License, respectively. See COPYING.2 and
- * COPYING.LESSER in the parent directory of this file.
- */
-
-#include <SerialStream.h>
-#include <iostream>
+#include "serialCommunication.h"
 #include <MMS.h>
 #include <MMSConnections.h>
 #include <Listeners.h>
+#include <iostream>
 #include <pthread.h>
 
 using std::cout;
 using std::endl;
 
-using namespace LibSerial;
+int fd = 0;
 
-SerialStream arduino;
+bool defaultHandler(Message* message, MMSConnection* connection){
+	vector<string> parameters = message->getParameters();
+	string name = message->getFunctionName();
+	string to_send = name;
+	for(unsigned int i = 0; i < parameters.size(); i++){
+		to_send += " ";
+		to_send += parameters[i];
+	}
+	
+	cout << "Received: " << to_send << endl;
+	to_send += '\n';
+	
+	serialport_write(fd, to_send.c_str());
+	return true;
+}
 
-void* serverListenThread(void* arguments){
-	MMSConnection* connection = (MMSConnection*)arguments;
+void* serverListener(void* arguments){
+	MMSConnection* connection = (MMSConnection*) arguments;
+	
 	SOCKET connection_socket = connection->getSocket();
     SOCKET highest_socket;
 
@@ -58,34 +48,107 @@ void* serverListenThread(void* arguments){
             }
         }
     }
-    pthread_exit(NULL);
-    return NULL;
+	
+	pthread_exit(NULL);
+	return NULL;
 }
 
-bool messageHandler(Message* message, MMSConnection* connection){
-	return true;
-}
+int main(int argc, char *argv[]) 
+{
+    char serialport[256];
+    int baudrate = B9600;  // default
+    char buf[256];
+    int rc,n;
+	string name;
 
-int main(int argc, char* argv[]){
+    if (argc==1) {
+        exit(EXIT_SUCCESS);
+    }
+	
 	MMSConnection* connection = new MMSConnection();
-	connection->connectToHost("randomprojects.net", "2568", false);
 	MainListener* listener = new MainListener();
-	listener->registerDefaultMessageHandler(messageHandler);
+	connection->connectToHost("localhost", "2568", false);
 	MMSConnectEvent connectEvent(connection, "2568");
 	listener->onConnectEvent(connectEvent);
-	arduino.Open("/dev/ttyUSB0");    
-    arduino.SetBaudRate(SerialStreamBuf::BAUD_9600);  
-    arduino.SetCharSize(SerialStreamBuf::CHAR_SIZE_8);
+	listener->registerDefaultMessageHandler(defaultHandler);
+
+    /* parse options */
+    int option_index = 0, opt;
+    static struct option loptions[] = {
+        {"help",       no_argument,       0, 'h'},
+        {"port",       required_argument, 0, 'p'},
+        {"baud",       required_argument, 0, 'b'},
+        {"send",       required_argument, 0, 's'},
+        {"receive",    no_argument,       0, 'r'},
+        {"num",        required_argument, 0, 'n'},
+        {"delay",      required_argument, 0, 'd'}
+    };
+    
+    while(1) {
+        opt = getopt_long (argc, argv, "hp:b:s:rn:d:",
+                           loptions, &option_index);
+        if (opt==-1) break;
+        switch (opt) {
+        case '0': break;
+        case 'd':
+            n = strtol(optarg,NULL,10);
+            usleep(n * 1000 ); // sleep milliseconds
+            break;
+        case 'h':
+            //usage();
+            break;
+        case 'b':
+            baudrate = strtol(optarg,NULL,10);
+            break;
+        case 'p':
+            strcpy(serialport,optarg);
+            fd = serialport_init(optarg, baudrate);
+            if(fd==-1) return -1;
+            break;
+        case 'n':
+            n = strtol(optarg, NULL, 10); // convert string to number
+            rc = serialport_writebyte(fd, (uint8_t)n);
+            if(rc==-1) return -1;
+            break;
+        case 's':
+            strcpy(buf,optarg);
+            rc = serialport_write(fd, buf);
+            if(rc==-1) return -1;
+            break;
+        case 'r':
+			while(true){
+				serialport_read_until(fd, buf, '\n');
+				//if(rv == -1) continue;
+				//sleep(2);
+				printf("read: %s",buf);
+			}
+            break;
+        }
+    }
+	
+	pthread_t serverT;
+	pthread_create(&serverT, NULL, serverListener, (void*)connection);
+	
 	while(connection->isConnected()){
-		char buffer[512];
-		memset(buffer, 0, 512);
-		arduino.read(buffer, 512);
-		cout << buffer << endl;
-		/*vector<byte> to_send;
-		for(unsigned int i = 0; i < strlen(buffer); i++){
-			to_send.push_back(buffer[i]);
+		serialport_read_until(fd, buf, '\n');
+		if(strlen(buf) <= 1) continue;
+		buf[strlen(buf)-1] = 0;
+		if(strncmp(buf, "name:", 5) == 0){
+			name = &buf[5];
+			cout << name << endl;
+			continue;
 		}
-		connection->handleWrite(to_send_vector, 2, "CIC");*/
+		cout << "Arduino: " << buf << endl;
+		vector<byte> to_send;
+		for(unsigned int i = 0; i < strlen(buf); i++){
+			to_send.push_back(buf[i]);
+		}
+		connection->handleWrite(to_send, 2, name);
 	}
-	return 0;
-}
+	
+	pthread_join(serverT, NULL);
+
+    exit(EXIT_SUCCESS);    
+} // end main
+    
+

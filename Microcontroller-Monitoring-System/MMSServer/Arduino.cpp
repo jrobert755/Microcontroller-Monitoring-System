@@ -252,21 +252,16 @@ bool Arduino::setName(string name){
 	if(m_directory != NULL){
 		delete m_directory;
 	}
-	//cout << "Creating m_directory" << endl;
-	m_directory = new Directory(name, "");
-	//cout << "m_directory created" << endl << "Getting readings" << endl;
+	m_directory = new Directory(m_name, "");
 	map<string, File*> reading_files = m_directory->getAllFiles();
-	//cout << "Adding readings" << endl;
 	m_data->addAllReadings(reading_files);
-	//cout << "Gettings settings file" << endl;
 	map<string, File*>::iterator iter = reading_files.find("settings.txt");
 	if(iter != reading_files.end()){
-		//cout << "Loading settings" << endl;
 		list<map<string, string> > settings = SettingsLoader::loadFile(iter->second->getName());
-		//cout << "Setting settings" << endl;
 		for(list<map<string, string> >::iterator iter = settings.begin(); iter != settings.end(); iter++){
 			map<string, string>::iterator map_iter = iter->find("name");
 			string section_name = map_iter->second;
+			if(section_name[section_name.length() - 1] == '\r') section_name = section_name.substr(0, section_name.length() -1 );
 			if(section_name == "global"){
 				for(map<string, string>::iterator settings_iter = iter->begin(); settings_iter != iter->end(); settings_iter++){
 					string item = settings_iter->first;
