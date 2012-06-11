@@ -5,3 +5,4 @@
 -Move all code implementations that can be to .cpp files
 -Move the read code for reading in raw data from a socket
 	from the listener to the server loop(?)
+-Fix maps and sets segfaulting by implementing them as thread safe.

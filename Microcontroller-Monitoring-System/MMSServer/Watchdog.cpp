@@ -23,15 +23,20 @@ void* watchdogThread(void* arguments){
 		string file_name = convertMDYtoString(current_time);
 		file_name += ".csv";
 		for(map<string, Arduino*>::iterator iter = known_arduinos.begin(); iter != known_arduinos.end(); iter++){
-			if(!iter->second->isConnected()) continue;
 			string arduino_name = iter->first;
+			if(!iter->second->isConnected()){
+				sendMessage(arduino_name);
+				pthread_exit(NULL);
+				return NULL;
+			}
 			string full_file_name = arduino_name + file_name;
 			struct stat buffer;
 			if(lstat(full_file_name.c_str(), &buffer) == -1){
 				//error out cause correct file was not found
-				sendMessage(arduino_name);
+				/*sendMessage(arduino_name);
 				pthread_exit(NULL);
-				return NULL;
+				return NULL;*/
+				continue;
 			}
 			if(buffer.st_mtime - current_time >= 3600){
 				//error out cause file time is outdated

@@ -92,6 +92,7 @@ int main(int argc, char* argv[]){
 #endif
 	server = new MMSServer();
 	MainListener* listener = new MainListener();
+	server->setRunning(true);
 	listener->initialize("MainHandler");
 	listener->registerMessageHandler("echo", echo);
 	listener->registerMessageHandler("authorize", authorize);
@@ -108,7 +109,6 @@ int main(int argc, char* argv[]){
 	listener->registerDisconnectionHandler("2568", handleArduinoDisconnection);
 	server->registerConnectionListener(listener);
 	server->registerDisconnectionListener(listener);
-	server->setRunning(true);
 #ifdef _WIN32
 	ProcessArguments* computer_thread_arguments = new ProcessArguments();
 	computer_thread_arguments->port = "2567";
@@ -144,7 +144,6 @@ int main(int argc, char* argv[]){
 		return -1;
 	}
 #endif
-	server->setRunning(false);
 
 #ifdef _WIN32
 	WaitForSingleObject((HANDLE)arduino_thread, INFINITE);
@@ -154,6 +153,7 @@ int main(int argc, char* argv[]){
 #else
 	pthread_join(arduino_thread, NULL);
 	pthread_join(computer_thread, NULL);
+	server->setRunning(false);
 	pthread_join(watchdog_thread, NULL);
 #endif
 

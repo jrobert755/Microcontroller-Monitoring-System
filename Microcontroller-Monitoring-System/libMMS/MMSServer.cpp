@@ -148,7 +148,7 @@ int MMSServer::serverLoop(string port, bool handleTimeout){
 	}
 	//TODO: Clean up all connections
 	map<string, map<SOCKET, MMSConnection*>*>::iterator iter = m_connections.find(port);
-	m_connections.erase(iter);
+	if(iter != m_connections.end()) m_connections.erase(iter);
 	for(map<SOCKET, MMSConnection*>::iterator iter = connections.begin(); iter != connections.end(); iter++){
 		MMSDisconnectEvent disconnectEvent(iter->second, port);
 		m_disconnection_listener->onDisconnectEvent(disconnectEvent);
