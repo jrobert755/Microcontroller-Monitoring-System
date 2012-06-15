@@ -42,6 +42,7 @@ public:
 	bool setName(string name);
 
 	bool addNewReading(int pinNumber, time_t timeOfReading, double reading);
+	bool addNewTemperatureReading(double temperatureReading);
 	map<time_t, double> getReadings(int pinNumber, time_t startTime, time_t endTime, time_t interval);
 	vector<string> getAllReadingsByPin();
 

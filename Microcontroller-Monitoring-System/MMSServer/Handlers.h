@@ -20,6 +20,7 @@ bool authorize(Message* message, MMSConnection* connection);
 bool hello(Message* message, MMSConnection* connection);
 bool ok(Message* message, MMSConnection* connection);
 bool addPinData(Message* message, MMSConnection* connection);
+bool addTemperatureData(Message* message, MMSConnection* connection);
 bool resendLastMessage(Message* message, MMSConnection* connection);
 
 bool handleComputerConnection(MMSConnection* connection, string port);

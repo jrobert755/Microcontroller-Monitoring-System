@@ -15,7 +15,12 @@ void sendMessage(string& arduino_name){
    std ::cout << m.response() << "\n";
 }
 
+#ifdef _WIN32
+#include <process.h>
+unsigned __stdcall watchdogThread(void* arguments){
+#else
 void* watchdogThread(void* arguments){
+#endif
 	MMSServer* server = (MMSServer*)arguments;
 	sleep(300);
 	while(server->isRunning()){
@@ -26,12 +31,22 @@ void* watchdogThread(void* arguments){
 			string arduino_name = iter->first;
 			if(!iter->second->isConnected()){
 				sendMessage(arduino_name);
+#ifdef _WIN32
+				_endthreadex(0);
+				return 0;
+#else
 				pthread_exit(NULL);
 				return NULL;
+#endif
 			}
 			string full_file_name = arduino_name + file_name;
+#ifdef _WIN32
+			struct _stat buffer;
+			if(_stat(full_file_name.c_str(), &buffer) == -1){
+#else
 			struct stat buffer;
 			if(lstat(full_file_name.c_str(), &buffer) == -1){
+#endif
 				//error out cause correct file was not found
 				/*sendMessage(arduino_name);
 				pthread_exit(NULL);
@@ -41,12 +56,22 @@ void* watchdogThread(void* arguments){
 			if(buffer.st_mtime - current_time >= 3600){
 				//error out cause file time is outdated
 				sendMessage(arduino_name);
+#ifdef _WIN32
+				_endthreadex(0);
+				return 0;
+#else
 				pthread_exit(NULL);
 				return NULL;
+#endif
 			}
 		}
 		sleep(300);
 	}
+#ifdef _WIN32
+	_endthreadex(0);
+	return 0;
+#else
 	pthread_exit(NULL);
 	return NULL;
+#endif
 }

@@ -98,6 +98,7 @@ int main(int argc, char* argv[]){
 	listener->registerMessageHandler("authorize", authorize);
 	listener->registerMessageHandler("hello", hello);
 	listener->registerMessageHandler("addPinData", addPinData);
+	listener->registerMessageHandler("addTemperatureData", addTemperatureData);
 	listener->registerMessageHandler("resendLastMessage", resendLastMessage);
 	listener->registerMessageHandler("ok", ok);
 	listener->registerMessageHandler("getPinData", getPinData);

@@ -297,6 +297,31 @@ bool Arduino::addNewReading(int pinNumber, time_t timeOfReading, double reading)
 	return m_data->addNewReading(pinNumber, timeOfReading, reading);
 }
 
+bool Arduino::addNewTemperatureReading(double temperatureReading){
+	string file_name = "temperature";
+	file_name += ".csv";
+	File* output_file = m_directory->findFile(file_name);
+	if(output_file == NULL){
+		output_file = File::createBlankFile(m_directory->getName() + "/" + file_name);
+		m_directory->addFile(output_file, file_name);
+	}
+
+	time_t current_time = time(NULL);
+	
+	ostringstream ostr;
+	ostr << convertHMStoString(current_time) << "," << temperatureReading;
+#ifdef _WIN32
+	ostr << "\r";
+#endif
+	ostr << "\n";
+
+	vector<string> file_contents = output_file->getVectorData();
+	file_contents.push_back(ostr.str());
+	output_file->setVectorData(file_contents);
+
+	return true;
+}
+
 map<time_t, double> Arduino::getReadings(int pinNumber, time_t startTime, time_t endTime, time_t interval){
 	return m_data->getReadings(pinNumber, startTime, endTime, interval);
 }

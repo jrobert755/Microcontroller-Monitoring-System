@@ -33,9 +33,6 @@
     <ClInclude Include="Listeners.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Documents\Visual Studio 2010\Projects\OpSysHW4\OpSysHW4\ProcessEvent.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MMSConnections.cpp">
@@ -54,9 +51,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Message.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Documents\Visual Studio 2010\Projects\OpSysHW4\OpSysHW4\ProcessEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

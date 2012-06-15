@@ -196,6 +196,22 @@ bool addPinData(Message* message, MMSConnection* connection){
 	return true;
 }
 
+bool addTemperatureData(Message* message, MMSConnection* connection){
+	if(message->getTypeOfConnection() != 2) return false;
+	vector<string> parameters = message->getParameters();
+	if(parameters.size() != 1) return false;
+	string arduino_name = message->getName();
+
+	Arduino* arduino = findArduino(arduino_name, connection);
+	arduino->handledMessage();
+
+	double reading;
+	sscanf_s(parameters[0].c_str(), "%lf", &reading);
+
+	arduino->addNewTemperatureReading(reading);
+	return true;
+}
+
 bool resendLastMessage(Message* message, MMSConnection* connection){
 	if(message->getTypeOfConnection() != 2) return false;
 	string arduino_name = message->getName();

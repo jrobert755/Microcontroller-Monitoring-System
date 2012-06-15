@@ -113,7 +113,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../libMMS;../libFileHandler;../libSettings;../libCompression</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../libMMS;../libFileHandler;../libSettings;../libCompression;../libjwsmtp</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +149,9 @@
     <ProjectReference Include="..\libFileHandler\libFileHandler.vcxproj">
       <Project>{83763cda-b819-4661-b817-6ae7f888b334}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\libjwsmtp\libjwsmtp.vcxproj">
+      <Project>{8d509269-2667-4499-9324-37b46c2f4d05}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\libMMS\libMMS.vcxproj">
       <Project>{850f258f-2f3c-4824-8479-3d0ac51ef56b}</Project>
     </ProjectReference>
@@ -164,6 +167,7 @@
     <ClCompile Include="PollCurve.cpp" />
     <ClCompile Include="Resistor.cpp" />
     <ClCompile Include="Simulation.cpp" />
+    <ClCompile Include="Watchdog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arduino.h" />
@@ -172,6 +176,7 @@
     <ClInclude Include="Handlers.h" />
     <ClInclude Include="PollCurve.h" />
     <ClInclude Include="Resistor.h" />
+    <ClInclude Include="Watchdog.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TODO.txt" />

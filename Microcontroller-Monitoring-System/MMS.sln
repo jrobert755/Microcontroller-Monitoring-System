@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMMS", "libMMS\libMMS.vcxproj", "{850F258F-2F3C-4824-8479-3D0AC51EF56B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MMSServer", "MMSServer\MMSServer.vcxproj", "{06FAB8BD-A1A9-466D-AB59-6C52707C775C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8D509269-2667-4499-9324-37B46C2F4D05} = {8D509269-2667-4499-9324-37B46C2F4D05}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MMSClient", "MMSClient\MMSClient.vcxproj", "{C1F8DE06-4592-4FE5-9E36-993C28A1E8C0}"
 EndProject
@@ -12,6 +15,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSettings", "libSettings\libSettings.vcxproj", "{75D034E1-0552-4F20-9E2B-6E00178D227E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libCompression", "libCompression\libCompression.vcxproj", "{470D8F31-AC8A-43B8-9C07-FE15A57E8132}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjwsmtp", "libjwsmtp\libjwsmtp.vcxproj", "{8D509269-2667-4499-9324-37B46C2F4D05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +70,12 @@ Global
 		{470D8F31-AC8A-43B8-9C07-FE15A57E8132}.Release|Win32.ActiveCfg = Release|Win32
 		{470D8F31-AC8A-43B8-9C07-FE15A57E8132}.Release|Win32.Build.0 = Release|Win32
 		{470D8F31-AC8A-43B8-9C07-FE15A57E8132}.Release|x64.ActiveCfg = Release|Win32
+		{8D509269-2667-4499-9324-37B46C2F4D05}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8D509269-2667-4499-9324-37B46C2F4D05}.Debug|Win32.Build.0 = Debug|Win32
+		{8D509269-2667-4499-9324-37B46C2F4D05}.Debug|x64.ActiveCfg = Debug|Win32
+		{8D509269-2667-4499-9324-37B46C2F4D05}.Release|Win32.ActiveCfg = Release|Win32
+		{8D509269-2667-4499-9324-37B46C2F4D05}.Release|Win32.Build.0 = Release|Win32
+		{8D509269-2667-4499-9324-37B46C2F4D05}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

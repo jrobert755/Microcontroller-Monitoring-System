@@ -1,17 +1,25 @@
 #ifndef _SIMULATION_H_
 #define _SIMULATION_H_
 
+#include <ctime>
 #include <string>
 #include <list>
 #include <map>
+#include <vector>
+#include <fstream>
+#include <algorithm>
 
 using std::string;
 using std::list;
 using std::map;
+using std::vector;
+using std::transform;
+
+using std::ofstream;
 
 class SimulationPin{
 public:
-	SimulationPin();
+	SimulationPin(){}
 	void setPinValues(int value, string response, string valueType);
 	void setPin(int pin);
 	void setParameter(string parameter);
@@ -31,14 +39,29 @@ private:
 	string m_record_frequency;
 };
 
+
+typedef unsigned char byte;
+
 class Simulation{
 public:
-	Simulation(list<map<string, string> > settings);
+	Simulation(list<map<string, string> > settings, vector<byte> fileContents);
+	~Simulation();
+	
+	time_t getStartTime(){ return m_start; }
+	time_t getEndTime(){ return m_end; }
 private:
-	SimulationPin** m_pin_data;
+	vector<SimulationPin*> m_pin_data;
 	string m_output_directory;
+	string m_output_file;
 	time_t m_start, m_end;
 	string m_user;
+};
+
+class SimulationScheduler{
+public:
+	bool insert(Simulation* simToInsert);
+private:
+	vector<Simulation*> m_simulations;
 };
 
 #endif

@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Documents\Visual Studio 2010\Projects\OpSysHW4\OpSysHW4\ProcessEvent.h" />
     <ClInclude Include="Listeners.h" />
     <ClInclude Include="MMS.h" />
     <ClInclude Include="MMSListeners.h" />
@@ -28,7 +27,6 @@
     <ClInclude Include="MMSServer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Documents\Visual Studio 2010\Projects\OpSysHW4\OpSysHW4\ProcessEvent.cpp" />
     <ClCompile Include="Listeners.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MMSConnections.cpp" />
