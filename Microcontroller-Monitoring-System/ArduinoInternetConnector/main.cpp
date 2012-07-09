@@ -1,9 +1,11 @@
 #include "serialCommunication.h"
-#include <MMS.h>
-#include <MMSConnections.h>
-#include <Listeners.h>
+//#include <MMS.h>
+//#include <MMSConnections.h>
+//#include <Listeners.h>
 #include <iostream>
-#include <pthread.h>
+//#include <pthread.h>
+
+#include "HTTPConnection.h"
 
 using std::cout;
 using std::endl;
@@ -130,7 +132,8 @@ int main(int argc, char *argv[])
 	pthread_create(&serverT, NULL, serverListener, (void*)connection);*/
 	
 	HTTPConnection connection("localhost");
-	while(connection->isConnected()){
+	//while(connection->isConnected()){
+	while(true){
 		serialport_read_until(fd, buf, '\n');
 		if(strlen(buf) <= 1) continue;
 		buf[strlen(buf)-1] = 0;

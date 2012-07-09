@@ -7,11 +7,21 @@
 #include <WS2tcpip.h>
 #pragma comment(lib, "ws2_32")
 #else
+#include <pthread.h>
+#include <sys/select.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <errno.h>
+#include <netdb.h>
 #define CloseConnection(x) close(x)
 #endif
 
 #include <string>
 #include <sstream>
+#include <cstring>
+#include <cstdlib>
 
 using std::string;
 using std::ostringstream;
