@@ -1,4 +1,7 @@
-void fmtDouble(double val, byte precision, char *buf, unsigned bufLen);
+#include <Arduino.h>
+
+unsigned fmtUnsigned(unsigned long val, char *buf, unsigned bufLen = 0xffff, byte width = 0);
+void fmtDouble(double val, byte precision, char *buf, unsigned bufLen = 0xffff);
 
 class Message{
 public:

@@ -95,20 +95,17 @@ Message::Message(){
 }
 
 void Message::SerialRead(){
-	while(Serial.available(){
-		if(m_is_complete){
-			m_is_complete = false;
-			m_current_position = 0;
-		}
+	while(Serial.available()){
 		byte read_in = Serial.read();
 		if(read_in == '\n'){
+			m_buffer[m_current_position] = 0;
 			m_is_complete = true;
 			break;
 		} else m_buffer[m_current_position++] = read_in;
 	}
 }
 
-void Message::SerialWrite(const* char message){
+void Message::SerialWrite(const char* message){
 	Serial.write(message);
 }
 
@@ -117,5 +114,7 @@ bool Message::isMessageComplete(){
 }
 
 const char* Message::getMessage(){
+	m_is_complete = false;
+	m_current_position = 0;
 	return m_buffer;
 }

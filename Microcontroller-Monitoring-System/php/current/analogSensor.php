@@ -26,6 +26,10 @@
 					$output_string .= "readtime=".$row['pollcurvereadtime']."\n";
 					$query = "UPDATE analogsensorconfiguration SET currentspot=".($current_spot + 1)." WHERE serial='$serial'";
 					$mysqliDatabase->query($query);
+					if(($current_spot+1) == count($resistances)){
+						$query = "UPDATE analogsensorconfiguration SET pollcurve=0 WHERE serial='$serial'";
+						$mysqliDatabase->query($query);
+					}
 				} else{
 					$output_string .= "readtime=".$row['readtime']."\n";
 				}
@@ -52,13 +56,17 @@
 		$time = $datetime->format('Y-m-d H:i:s');
 		$reading = $postArray['reading'];
 		$pin = $postArray['pin'];
-		$query = "INSERT INTO analogsensorreadings VALUES ('$serial', '$nickname', '$time', '$reading', '$pin')";
+		$query = "SELECT * FROM analogsensorconfiguration WHERE serial='$serial'";
+		$result = $mysqliDatabase->query($query);
+		$row = $result->fetch_array(MYSQLI_ASSOC);
+		$pollcurve = $row['pollcurve'];
+		$query = "INSERT INTO analogsensorreadings VALUES ('$serial', '$nickname', '$time', '$reading', '$pin', '$pollcurve')";
 		if(!$mysqliDatabase->query($query)){
 			echo "Nope\n";
 			echo $query."\n";
 		}
 		$mysqliDatabase->close();
-		updateAnalogSensor($serial);
+		//updateAnalogSensor($serial);
 	}
 	
 	function downloadAnalogReadings($postArray){
@@ -87,5 +95,6 @@
 			//echo "\"".$row['time']."\",".$row['reading'].",".$row['pin']."\r\n";
 			echo "\"".$row['time']."\",".$row['reading'].",".$row['pin'].($row['pollcurvereading'] == '1' ? ",pollcurve" : "")."\r\n";
 		}
+		$mysqliDatabase->close();
 	}
 ?>

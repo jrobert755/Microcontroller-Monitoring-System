@@ -150,11 +150,28 @@ int main(int argc, char *argv[])
 		connection->handleWrite(to_send, 2, name);*/
 		string read_in = buf;
 		size_t position = read_in.find(';');
+		if(position == string::npos) continue;
 		string where = read_in.substr(0, position);
 		string to_send = read_in.substr(position+1);
 		string output;
 		if(where == "newreading") connection.sendMessage(Post, "/current/newreading.php", to_send, output);
+		else if(where =="update") connection.sendMessage(Post, "/current/update.php", to_send, output);
+		else continue;
 		cout << "Server: " << endl << output;
+		
+		//apache uses \r\n; i use \n
+		position = output.find("\r\n\r\n");
+		string to_arduino = output.substr(position+4);
+		position = 0;
+		size_t position2 = 0;
+		while(position != string::npos && position < to_arduino.length()){
+			position2 = to_arduino.find("\n", position);
+			string temp = to_arduino.substr(position, position2+1);
+			cout << "Wrote to arduino: " << temp << endl;
+			serialport_write(fd, temp.c_str());
+			position = position2;
+			if(position != string::npos) position++;
+		}
 	}
 	
 	//pthread_join(serverT, NULL);
