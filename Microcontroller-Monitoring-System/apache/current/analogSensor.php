@@ -83,7 +83,19 @@
 		if(!array_key_exists('regular', $postArray) && !array_key_exists('pollcurve', $postArray)){
 			$query .= " AND pollcurvereading='0'";
 		}
+		$set = false;
+		for($i = 0; $i < 6; $i++){
+			$string_i = "pin".$i;
+			if(array_key_exists($string_i, $postArray) && $postArray[$string_i] == "1"){
+				if(!$set){
+					$set = true;
+					$query .= " AND (pin='$i'";
+				} else $query .= " OR pin='$i'";
+			}
+		}
+		if($set) $query .= ")";
 		$query .= " ORDER BY time";
+		//echo $query;
 		$results = $mysqliDatabase->query($query);
 		$row = $results->fetch_array(MYSQLI_ASSOC);
 		header('Content-type: text/csv');
