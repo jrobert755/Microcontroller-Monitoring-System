@@ -1,0 +1,32 @@
+﻿Build started 6/14/2012 11:21:12 AM.
+     1>Project "C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\libMMS\libMMS.vcxproj" on node 4 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release\libMMS.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Release\libMMS.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Listeners.cpp Message.cpp MMSConnections.cpp MMSEvents.cpp MMSHelper.cpp MMSServer.cpp
+         Listeners.cpp
+         Message.cpp
+         MMSConnections.cpp
+         MMSEvents.cpp
+         MMSHelper.cpp
+         MMSServer.cpp
+     1>MMSServer.cpp(145): warning C4996: 'asctime': This function or variable may be unsafe. Consider using asctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\time.h(153) : see declaration of 'asctime'
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\Release\libMMS.lib" /NOLOGO /LTCG Release\Listeners.obj
+         Release\Message.obj
+         Release\MMSConnections.obj
+         Release\MMSEvents.obj
+         Release\MMSHelper.obj
+         Release\MMSServer.obj
+         libMMS.vcxproj -> C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\Release\libMMS.lib
+       FinalizeBuildStatus:
+         Deleting file "Release\libMMS.unsuccessfulbuild".
+         Touching "Release\libMMS.lastbuildstate".
+     1>Done Building Project "C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\libMMS\libMMS.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.24

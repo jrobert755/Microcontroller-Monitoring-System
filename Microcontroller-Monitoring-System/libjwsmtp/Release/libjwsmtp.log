@@ -1,0 +1,28 @@
+﻿Build started 6/14/2012 11:21:12 AM.
+     1>Project "C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\libjwsmtp\libjwsmtp.vcxproj" on node 5 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release\libjwsmtp.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Release\libjwsmtp.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt base64.cpp compat.cpp mailer.cpp
+         base64.cpp
+         compat.cpp
+         mailer.cpp
+     1>mailer.cpp(438): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>mailer.cpp(734): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\time.inl(112) : see declaration of 'localtime'
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\Release\libjwsmtp.lib" /NOLOGO /LTCG Release\base64.obj
+         Release\compat.obj
+         Release\mailer.obj
+         libjwsmtp.vcxproj -> C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\Release\libjwsmtp.lib
+       FinalizeBuildStatus:
+         Deleting file "Release\libjwsmtp.unsuccessfulbuild".
+         Touching "Release\libjwsmtp.lastbuildstate".
+     1>Done Building Project "C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\libjwsmtp\libjwsmtp.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.53

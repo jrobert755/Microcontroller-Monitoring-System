@@ -1,0 +1,23 @@
+﻿Build started 6/14/2012 11:21:12 AM.
+     1>Project "C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\libFileHandler\libFileHandler.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release\libFileHandler.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Release\libFileHandler.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Directory.cpp File.cpp
+         Directory.cpp
+     1>Directory.cpp(108): warning C4101: 'e' : unreferenced local variable
+         File.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\Release\libFileHandler.lib" /NOLOGO /LTCG Release\Directory.obj
+         Release\File.obj
+         libFileHandler.vcxproj -> C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\Release\libFileHandler.lib
+       FinalizeBuildStatus:
+         Deleting file "Release\libFileHandler.unsuccessfulbuild".
+         Touching "Release\libFileHandler.lastbuildstate".
+     1>Done Building Project "C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\libFileHandler\libFileHandler.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.33

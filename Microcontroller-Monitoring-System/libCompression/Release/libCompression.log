@@ -1,0 +1,45 @@
+﻿Build started 6/14/2012 11:21:15 AM.
+     1>Project "C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\libCompression\libCompression.vcxproj" on node 4 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release\libCompression.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Release\libCompression.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../libFileHandler /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt bzip2\blocksort.c bzip2\bzlib.c bzip2\compress.c bzip2\crctable.c bzip2\decompress.c bzip2\huffman.c bzip2\randtable.c
+         blocksort.c
+         bzlib.c
+     1>bzip2\bzlib.c(1423): warning C4996: 'setmode': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _setmode. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\io.h(314) : see declaration of 'setmode'
+     1>bzip2\bzlib.c(1423): warning C4996: 'fileno': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _fileno. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(723) : see declaration of 'fileno'
+     1>bzip2\bzlib.c(1431): warning C4996: 'fdopen': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _fdopen. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(721) : see declaration of 'fdopen'
+         compress.c
+         crctable.c
+         decompress.c
+         huffman.c
+         randtable.c
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../libFileHandler /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Compression.cpp Tar.cpp TarHeader.cpp
+         Compression.cpp
+         Tar.cpp
+         TarHeader.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\Release\libCompression.lib" /NOLOGO /LTCG Release\blocksort.obj
+         Release\bzlib.obj
+         Release\compress.obj
+         Release\crctable.obj
+         Release\decompress.obj
+         Release\huffman.obj
+         Release\randtable.obj
+         Release\Compression.obj
+         Release\Tar.obj
+         Release\TarHeader.obj
+         libCompression.vcxproj -> C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\Release\libCompression.lib
+       FinalizeBuildStatus:
+         Deleting file "Release\libCompression.unsuccessfulbuild".
+         Touching "Release\libCompression.lastbuildstate".
+     1>Done Building Project "C:\Users\Jean-Luc\Microcontroller-Monitoring-System\Microcontroller-Monitoring-System\libCompression\libCompression.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.56
