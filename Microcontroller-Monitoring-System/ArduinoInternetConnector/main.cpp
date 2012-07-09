@@ -154,8 +154,8 @@ int main(int argc, char *argv[])
 		string where = read_in.substr(0, position);
 		string to_send = read_in.substr(position+1);
 		string output;
-		if(where == "newreading") connection.sendMessage(Post, "/current/newreading.php", to_send, output);
-		else if(where =="update") connection.sendMessage(Post, "/current/update.php", to_send, output);
+		if(where == "newreading") connection.sendMessage(Post, "/logger/current/newreading.php", to_send, output);
+		else if(where =="update") connection.sendMessage(Post, "/logger/current/update.php", to_send, output);
 		else continue;
 		cout << "Server: " << endl << output;
 		
