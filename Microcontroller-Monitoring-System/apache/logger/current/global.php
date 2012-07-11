@@ -1,6 +1,7 @@
 <?php
 	$UpdateSensorFunctions = array();
 	$NewReadingsFunctions = array();
+	$DownloadOptionsFunctions = array();
 	$DownloadReadingsFunctions = array();
 	$Sensor = array();
 	
@@ -8,6 +9,7 @@
 	global $UpdateSensorFunctions;
 	global $NewReadingsFunctions;
 	global $DownloadReadingsFunctions;
+	global $DownloadOptionsFunctions;
 	
 	$Sensor["username"] = "sensoraccess";
 	$Sensor["password"] = "access755";

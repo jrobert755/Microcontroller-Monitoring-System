@@ -1,18 +1,32 @@
 <html>
+<script type="text/javascript">
+function getOptions(){
+	//var serial = document.getElementById("main").elements["serial"].value;
+	//var nickname = document.getElementById("main").elements["nickname"].value;
+	var serial = document.getElementsByName("serial")[0].value;
+	var nickname = document.getElementsByName("nickname")[0].value;
+	if(serial == "" && nickname == ""){
+		document.getElementById("options").innerHTML = "False";
+		return;
+	}
+	var request = new XMLHttpRequest();
+	request.open("POST", "/logger/current/getdownloadoptions.php", false);
+	request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	if(serial != "") request.send("serial=" + serial);
+	else request.send("nickname=" + nickname);
+	document.getElementById("main").innerHTML=request.responseText;
+	if(request.getResponseHeader("Content-Type") == "text/html"){
+		var serial_field = document.getElementsByName("serial");
+		var nickname_field = document.getElementsByName("nickname");
+		if(serial_field[0]) serial_field[0].value = serial;
+		if(nickname_field[0]) nickname_field[0].value = nickname;
+	}
+}
+</script>
+<div id="main">
 Only need one:<br />
-<form action="./current/downloadreadings.php" method="post">
 Serial: <input type="text" name="serial" /><br />
 Nickname: <input type="text" name="nickname" /><br />
-<br />
-<input type="checkbox" name="regular" value="1" /> Regular data?<br />
-<input type="checkbox" name="pollcurve" value="1" /> Poll curve data?<br />
-<br />
-<input type="checkbox" name="pin0" value="1" /> Pin 0<br />
-<input type="checkbox" name="pin1" value="1" /> Pin 1<br />
-<input type="checkbox" name="pin2" value="1" /> Pin 2<br />
-<input type="checkbox" name="pin3" value="1" /> Pin 3<br />
-<input type="checkbox" name="pin4" value="1" /> Pin 4<br />
-<input type="checkbox" name="pin5" value="1" /> Pin 5<br />
-<input type="submit" value="Submit" />
-</form>
+<input type="button" value="Submit" onclick="getOptions()"/>
+</div>
 </html>

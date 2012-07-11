@@ -2,10 +2,12 @@
 	global $UpdateSensorFunctions;
 	global $NewReadingsFunctions;
 	global $DownloadReadingsFunctions;
+	global $DownloadOptionsFunctions;
 	global $Sensor;
 	$UpdateSensorFunctions['abc'] = "updateAnalogSensor";
 	$NewReadingsFunctions['abc'] = "newAnalogReading";
 	$DownloadReadingsFunctions['abc'] = "downloadAnalogReadings";
+	$DownloadOptionsFunctions['abc'] = "analogDownloadOptions";
 	
 	function updateAnalogSensor($serial){
 		global $Sensor;
@@ -40,7 +42,6 @@
 			echo $output_string;
 		}
 		$mysqliDatabase->close();
-		
 	}
 	
 	function newAnalogReading($postArray){
@@ -108,5 +109,23 @@
 			echo "\"".$row['time']."\",".$row['reading'].",".$row['pin'].($row['pollcurvereading'] == '1' ? ",pollcurve" : "")."\r\n";
 		}
 		$mysqliDatabase->close();
+	}
+	
+	function analogDownloadOptions($postArray){
+		echo '<form action="./current/downloadreadings.php" method="post">';
+		echo 'Only need one:<br />';
+		echo 'Serial: <input type="text" name="serial" /><br />';
+		echo 'Nickname: <input type="text" name="nickname" /><br />';
+		echo '<input type="checkbox" name="regular" value="1" /> Regular data?<br />';
+		echo '<input type="checkbox" name="pollcurve" value="1" /> Poll curve data?<br />';
+		echo '<br />';
+		echo '<input type="checkbox" name="pin0" value="1" /> Pin 0<br />';
+		echo '<input type="checkbox" name="pin1" value="1" /> Pin 1<br />';
+		echo '<input type="checkbox" name="pin2" value="1" /> Pin 2<br />';
+		echo '<input type="checkbox" name="pin3" value="1" /> Pin 3<br />';
+		echo '<input type="checkbox" name="pin4" value="1" /> Pin 4<br />';
+		echo '<input type="checkbox" name="pin5" value="1" /> Pin 5<br />';
+		echo '<input type="submit" value="Submit" />';
+		echo '</form>';
 	}
 ?>
