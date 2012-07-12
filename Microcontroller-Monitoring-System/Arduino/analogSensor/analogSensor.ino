@@ -123,6 +123,7 @@ void loop(){
         strcat(temp_to_send, ";");
       }
     }
+    strcat(temp_to_send, '\n');
     Serial.write(temp_to_send);
     number_of_readings++;
   }
