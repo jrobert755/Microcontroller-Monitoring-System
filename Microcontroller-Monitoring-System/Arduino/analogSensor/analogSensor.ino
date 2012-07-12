@@ -1,4 +1,5 @@
 #include <Messagev2.h>
+#include <SPI.h>
 
 Message message;
 
@@ -14,7 +15,7 @@ bool sent;
 
 void reset_readings(){
   for(byte i = 0; i < 6; i++){
-    readings[i] = 0;
+    readings[i] = 0.0;
   }
   number_of_readings = 0;
 }
@@ -42,18 +43,13 @@ void loop(){
   if(message.isMessageComplete()){
     const char* read_message = message.getMessage();
     long location;
-    Serial.println("Got message");
     for(location = 0; location < strlen(read_message); location++){
       if(read_message[location] == '=') break;
     }
     
     if(location != strlen(read_message)){
       if(strncmp(read_message, "readtime", strlen("readtime")) == 0){
-        long temp_to_add = atol(&read_message[location+1]);
         next_send = millis() + atol(&read_message[location+1])*1000;
-        Serial.println(next_send, DEC);
-        Serial.println(millis(), DEC);
-        Serial.println(temp_to_add, DEC);
         if(next_send != millis()){
           sent = false;
         }
@@ -61,9 +57,26 @@ void loop(){
         pins_to_read = atoi(&read_message[location+1]);
         reset_readings();
         currently_reading = true;
-        Serial.println(pins_to_read);
       } else if(strncmp(read_message, "resistance", strlen("resistance")) == 0){
         //set resistance
+        long total_resistance = atol(&read_message[location+1]);
+        byte resistances[6];
+        byte current_resistor = 0;
+        for(int i = 0; i < 6; i++) resistances[i] = 0;
+        total_resistance -= (45*6);
+        while(total_resistance > 0 && current_resistor < 6){
+           long next_step = total_resistance >= 101000 ? 101000 : total_resistance;
+           total_resistance -= 101000;
+           resistances[current_resistor] = floor((256.0 * next_step) / (101000.0));
+           current_resistor++;
+        }
+        
+        for(int i = 0; i < 6; i++){
+          digitalWrite(10, LOW);
+          SPI.transfer(i);
+          SPI.transfer(resistances[i]);
+          digitalWrite(10, HIGH);
+        }
       }
     }
   }
@@ -96,14 +109,21 @@ void loop(){
     currently_reading = false;
   }
   
-  if(currently_reading && (last_reading + 10000) >= millis()){
+  if(currently_reading && (last_reading + 120000) >= millis()){
+    char temp_to_send[128];
+    strcpy(temp_to_send, "log;");
     for(byte i = 0; i < 6; i++){
       byte temp = 1<<i;
       if((pins_to_read&temp) == temp){
         int temp_voltage = analogRead(i);
         readings[i] += (5.0 * temp_voltage)/1024.0;
+        char holder[16];
+        sprintf(holder, "%d=%d", i, temp_voltage);
+        strcat(temp_to_send, holder);
+        strcat(temp_to_send, ";");
       }
     }
+    Serial.write(temp_to_send);
     number_of_readings++;
   }
 }
