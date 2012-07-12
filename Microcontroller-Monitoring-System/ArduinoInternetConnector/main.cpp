@@ -3,12 +3,14 @@
 //#include <MMSConnections.h>
 //#include <Listeners.h>
 #include <iostream>
+#include <fstream>
 //#include <pthread.h>
 
 #include "HTTPConnection.h"
 
 using std::cout;
 using std::endl;
+using std::ofstream;
 
 int fd = 0;
 
@@ -142,7 +144,9 @@ int main(int argc, char *argv[])
 			cout << name << endl;
 			continue;
 		}*/
+		ofstream ostr("logging.log", std::ios_base::app);
 		cout << "Arduino: " << buf << endl;
+		ostr << "Arduino: " << buf << endl;
 		/*vector<byte> to_send;
 		for(unsigned int i = 0; i < strlen(buf); i++){
 			to_send.push_back(buf[i]);
@@ -158,6 +162,8 @@ int main(int argc, char *argv[])
 		else if(where =="update") connection.sendMessage(Post, "/logger/current/update.php", to_send, output);
 		else continue;
 		cout << "Server: " << endl << output;
+		ostr << "Server: " << endl << output;
+		ostr.close();
 		
 		//apache uses \r\n; i use \n
 		position = output.find("\r\n\r\n");

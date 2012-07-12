@@ -1,0 +1,12 @@
+Arduino: update;serial=abcdefghijklmnop
+Server: 
+HTTP/1.1 200 OK
+Date: Thu, 12 Jul 2012 18:42:10 GMT
+Server: Apache/2.2.22 (Ubuntu)
+X-Powered-By: PHP/5.3.10-1ubuntu3.2
+Vary: Accept-Encoding
+Content-Length: 28
+Content-Type: text/html
+
+readtime=1200
+pinstoread=63
