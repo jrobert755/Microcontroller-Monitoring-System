@@ -1,0 +1,40 @@
+analogSensor.o: analogSensor.ino \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Arduino.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/binary.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/WCharacter.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/WString.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/HardwareSerial.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Stream.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Print.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Printable.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/new.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/variants/standard/pins_arduino.h \
+  /home/jrobert755/arduino-1.0.1//libraries/Messagev2/Messagev2.h \
+  /home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Arduino.h \
+  /home/jrobert755/arduino-1.0.1//libraries/SPI/SPI.h
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Arduino.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/binary.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/WCharacter.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/WString.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/HardwareSerial.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Stream.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Print.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Printable.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/new.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/variants/standard/pins_arduino.h:
+
+/home/jrobert755/arduino-1.0.1//libraries/Messagev2/Messagev2.h:
+
+/home/jrobert755/arduino-1.0.1//hardware/arduino/cores/arduino/Arduino.h:
+
+/home/jrobert755/arduino-1.0.1//libraries/SPI/SPI.h:
