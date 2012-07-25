@@ -13,6 +13,9 @@ bool currently_reading;
 byte pins_to_read;
 bool sent;
 
+long ab_resistance = 101700;
+byte number_of_resistors = 1;
+
 void reset_readings(){
   for(byte i = 0; i < 6; i++){
     readings[i] = 0.0;
@@ -63,13 +66,13 @@ void loop(){
         byte resistances[6];
         byte current_resistor = 0;
         for(int i = 0; i < 6; i++) resistances[i] = 0;
-        total_resistance -= (45*6);
-        while(total_resistance > 0 && current_resistor < 6){
-           long next_step = total_resistance >= 101000 ? 101000 : total_resistance;
-           total_resistance -= 101000;
-           resistances[current_resistor] = floor((256.0 * next_step) / (101000.0));
+        total_resistance -= (45*number_of_resistors);
+        //while(total_resistance > 0 && current_resistor < 6){
+           long next_step = total_resistance >= ab_resistance ? ab_resistance : total_resistance;
+           total_resistance -= ab_resistance;
+           resistances[current_resistor] = floor((256.0 * next_step) / (ab_resistance));
            current_resistor++;
-        }
+        //}
         
         for(int i = 0; i < 6; i++){
           digitalWrite(10, LOW);
@@ -88,6 +91,7 @@ void loop(){
       byte temp = 1<<i;
       if((pins_to_read&temp) == temp){
         readings[i] = readings[i]/number_of_readings;
+        readings[i] *= (5.0/1023.0);
         strcpy(to_send, "newreading;");
         strcat(to_send, serial);
         strcat(to_send, "&reading=");
@@ -109,22 +113,23 @@ void loop(){
     currently_reading = false;
   }
   
-  if(currently_reading && (last_reading + 120000) >= millis()){
+  if(currently_reading && (last_reading + 120000) <= millis()){
     char temp_to_send[128];
     strcpy(temp_to_send, "log;");
     for(byte i = 0; i < 6; i++){
       byte temp = 1<<i;
       if((pins_to_read&temp) == temp){
         int temp_voltage = analogRead(i);
-        readings[i] += (5.0 * temp_voltage)/1024.0;
+        readings[i] += temp_voltage;
         char holder[16];
         sprintf(holder, "%d=%d", i, temp_voltage);
         strcat(temp_to_send, holder);
         strcat(temp_to_send, ";");
       }
     }
-    strcat(temp_to_send, '\n');
+    strcat(temp_to_send, "\n");
     Serial.write(temp_to_send);
     number_of_readings++;
+    last_reading = millis();
   }
 }
