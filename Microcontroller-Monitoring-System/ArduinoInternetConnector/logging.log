@@ -1,0 +1,60 @@
+Arduino: update;serial=abcdefghijklmnop
+Server: 
+Arduino: update;serial=abcdefghijklmnop
+Server: 
+HTTP/1.1 200 OK
+Date: Fri, 27 Jul 2012 18:10:47 GMT
+Server: Apache/2.4.2 (Win32) PHP/5.4.4
+X-Powered-By: PHP/5.4.4
+Content-Length: 26
+Content-Type: text/html
+
+readtime=30
+pinstoread=31
+Arduino: update;serial=abcdefghijklmnop
+Server: 
+HTTP/1.1 200 OK
+Date: Fri, 27 Jul 2012 18:14:28 GMT
+Server: Apache/2.4.2 (Win32) PHP/5.4.4
+X-Powered-By: PHP/5.4.4
+Content-Length: 44
+Content-Type: text/html
+
+resistance=4000
+readtime=3600
+pinstoread=31
+Arduino: update;serial=abcdefghijklmnop
+Server: 
+HTTP/1.1 200 OK
+Date: Fri, 27 Jul 2012 18:21:36 GMT
+Server: Apache/2.4.2 (Win32) PHP/5.4.4
+X-Powered-By: PHP/5.4.4
+Content-Length: 44
+Content-Type: text/html
+
+resistance=4000
+readtime=3600
+pinstoread=31
+Arduino: enter resistance
+Arduino: 4000
+Arduino: 9
+Arduino: update;serial=abcdefghijklmnop
+Server: 
+HTTP/1.1 200 OK
+Date: Fri, 27 Jul 2012 18:23:54 GMT
+Server: Apache/2.4.2 (Win32) PHP/5.4.4
+X-Powered-By: PHP/5.4.4
+Content-Length: 44
+Content-Type: text/html
+
+resistance=4000
+readtime=3600
+pinstoread=31
+Arduino: enter resistance
+Arduino: 4000
+Arduino: 9
+Arduino: 0
+Arduino: 0
+Arduino: 0
+Arduino: 0
+Arduino: 0

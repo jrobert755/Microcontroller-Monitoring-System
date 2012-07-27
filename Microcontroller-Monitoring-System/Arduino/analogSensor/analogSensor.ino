@@ -25,6 +25,7 @@ void reset_readings(){
 
 void setup(){
   Serial.begin(9600);
+  SPI.begin();
   
   readings = (double*)malloc(sizeof(double) * 6);
   currently_reading = false;
@@ -62,7 +63,9 @@ void loop(){
         currently_reading = true;
       } else if(strncmp(read_message, "resistance", strlen("resistance")) == 0){
         //set resistance
+        Serial.println("enter resistance");
         long total_resistance = atol(&read_message[location+1]);
+        Serial.println(total_resistance, DEC);
         byte resistances[6];
         byte current_resistor = 0;
         for(int i = 0; i < 6; i++) resistances[i] = 0;
@@ -75,6 +78,7 @@ void loop(){
         //}
         
         for(int i = 0; i < 6; i++){
+          Serial.println(resistances[i], DEC);
           digitalWrite(10, LOW);
           SPI.transfer(i);
           SPI.transfer(resistances[i]);
