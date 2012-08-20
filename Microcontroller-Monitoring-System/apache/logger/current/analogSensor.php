@@ -8,6 +8,7 @@
 	$NewReadingsFunctions['abc'] = "newAnalogReading";
 	$DownloadReadingsFunctions['abc'] = "downloadAnalogReadings";
 	$DownloadOptionsFunctions['abc'] = "analogDownloadOptions";
+	$ConfigureOptionsFunctions['abc'] = "analogConfigureOptions";
 	
 	function updateAnalogSensor($serial){
 		global $Sensor;
@@ -125,6 +126,21 @@
 		echo '<input type="checkbox" name="pin3" value="1" /> Pin 3<br />';
 		echo '<input type="checkbox" name="pin4" value="1" /> Pin 4<br />';
 		echo '<input type="checkbox" name="pin5" value="1" /> Pin 5<br />';
+		echo '<input type="submit" value="Submit" />';
+		echo '</form>';
+	}
+	
+	function analogConfigureOptions($postArray){
+		echo '<form action="./current/configure.php" method="post">';
+		echo 'Only need one:<br />';
+		echo 'Serial: <input type="text" name="serial" /><br />';
+		echo 'Nickname: <input type="text" name="nickname" /><br />';
+		echo '<input type="checkbox" name="pollcurve" value="1" /> Do a poll curve?<br />';
+		echo 'Poll curve start: <input type="text" name="pollcurvestart" value="MM/DD/YYYY HH:MM:SS"/><br />';
+		echo 'Poll curve end: <input type="text" name="pollcurveend" value="MM/DD/YYYY HH:MM:SS"/><br />';
+		echo 'Enter resistances separated by a comma, no spaces.<br />';
+		echo 'Poll curve resistances: <input type="text" name="pollcurveend" /><br />';
+		echo '<br />';
 		echo '<input type="submit" value="Submit" />';
 		echo '</form>';
 	}

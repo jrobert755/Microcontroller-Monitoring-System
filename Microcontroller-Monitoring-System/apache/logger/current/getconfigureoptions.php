@@ -3,8 +3,8 @@
 	if(array_key_exists('serial', $_POST) && $_POST['serial'] != ""){
 		$serial = $_POST['serial'];
 		$model = $serial[0].$serial[1].$serial[2];
-		if(array_key_exists($model, $DownloadOptionsFunctions)){
-			$toCall = $DownloadOptionsFunctions[$model];
+		if(array_key_exists($model, $ConfigureOptionsFunctions)){
+			$toCall = $ConfigureOptionsFunctions[$model];
 			$toCall($_POST);
 		}
 	} else if(array_key_exists('nickname', $_POST)){
@@ -22,8 +22,8 @@
 			if($key == "serial") continue;
 			$postArray[$key] = $value;
 		}
-		if(array_key_exists($model, $DownloadOptionsFunctions)){
-			$toCall = $DownloadOptionsFunctions[$model];
+		if(array_key_exists($model, $ConfigureOptionsFunctions)){
+			$toCall = $ConfigureOptionsFunctions[$model];
 			$toCall($postArray);
 		}
 	}
