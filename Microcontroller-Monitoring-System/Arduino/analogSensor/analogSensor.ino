@@ -24,6 +24,7 @@ void reset_readings(){
 }
 
 void setup(){
+  analogReference(EXTERNAL);
   Serial.begin(9600);
   SPI.begin();
   
@@ -95,7 +96,7 @@ void loop(){
       byte temp = 1<<i;
       if((pins_to_read&temp) == temp){
         readings[i] = readings[i]/number_of_readings;
-        readings[i] *= (5.0/1023.0);
+        readings[i] *= (4.91/1023.0);
         strcpy(to_send, "newreading;");
         strcat(to_send, serial);
         strcat(to_send, "&reading=");
