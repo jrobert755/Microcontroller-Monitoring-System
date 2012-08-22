@@ -38,6 +38,7 @@ public:
 	void disconnect();
 	
 	bool sendMessage(SendMethod method, string page, string body, string& received);
+	string getHeader();
 private:
 	string m_address;
 	int m_connection_socket;
