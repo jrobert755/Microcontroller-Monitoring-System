@@ -68,7 +68,7 @@ bool HTTPConnection::sendMessage(SendMethod method, string page, string body, st
 
 string HTTPConnection::getHeader(){
 	string header = "";
-	char item;
+	char item[1];
 	bool first_cr = false, first_nl = false, second_cr = false, second_nl = false;
 	
 	while(true){
