@@ -65,3 +65,41 @@ bool HTTPConnection::sendMessage(SendMethod method, string page, string body, st
 	disconnect();
 	return true;
 }
+
+string HTTPConnection::getHeader(){
+	string header = "";
+	char item;
+	bool first_cr = false, first_nl = false, second_cr = false, second_nl = false;
+	
+	while(true){
+		int rv = recv(m_connection_socket, item, 1, 0);
+		if(rv < 0) break;
+		if(item == '\r'){
+			if(!first_cr){
+				first_cr = true;
+				first_nl = false;
+				second_cr = false;
+				second_nl = false;
+			} else if(first_cr && first_nl){
+				second_cr = true;
+			} else{
+				break;
+			}
+		} else if(item == '\n'){
+			if(first_cr && !second_cr){
+				first_nl = true;
+				second_nl = false;
+				header += item;
+			} else if(first_cr && second_cr){
+				header += item;
+				break;
+			} else{
+				break;
+			}
+		} else{
+			header += item;
+		}
+	}
+	
+	return header;
+}

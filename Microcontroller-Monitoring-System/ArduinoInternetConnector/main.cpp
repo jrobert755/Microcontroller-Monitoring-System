@@ -5,14 +5,37 @@
 #include <iostream>
 #include <fstream>
 //#include <pthread.h>
+#include <string>
+#include <sstream>
+#include <ctime>
 
 #include "HTTPConnection.h"
 
 using std::cout;
 using std::endl;
 using std::ofstream;
+using std::string;
+using std::ios_base;
+using std::ostringstream;
 
 int fd = 0;
+
+string serial = "";
+string path_to_file = "/home/jrobert755/googledrive/reading.csv";
+int pins_to_get = 0;
+
+void getReadings(){
+	string query_string = "serial=" + serial;
+	for(int i = 1; i < 64; i *= 2){
+		if((pins_to_get & i) == i){
+			query_string += "&pin";
+			query_string += (char)(i+48);
+		}
+	}
+	
+	ofstream ostr(path_to_file.c_str(), ios_base::out | ios_base::binary);
+	
+}
 
 /*bool defaultHandler(Message* message, MMSConnection* connection){
 	vector<string> parameters = message->getParameters();
@@ -158,7 +181,35 @@ int main(int argc, char *argv[])
 		string where = read_in.substr(0, position);
 		string to_send = read_in.substr(position+1);
 		string output;
-		if(where == "newreading") connection.sendMessage(Post, "/logger/current/newreading.php", to_send, output);
+		if(where == "newreading"){
+			connection.sendMessage(Post, "/logger/current/newreading.php", to_send, output);
+			size_t pos1 = 0;
+			size_t pos2 = 0;
+			string current_item;
+			int pin = 0;
+			double reading = 0;
+			while(pos1 != string::npos && pos1 < to_send.length()){
+				pos2 = to_send.find_first_of('&', pos1);
+				current_item = to_send.substr(pos1, pos2);
+				if(current_item.compare(0, strlen("pin"), "pin") == 0){
+					sscanf(current_item.c_str(), "pin=%lf", &pin);
+				} else if(current_item.compare(0, strlen("reading"), "reading") == 0){
+					sscanf(current_item.c_str(), "reading=%d", &reading);
+				}
+				pos1 = pos2 + 1;
+				if(pos1 >= to_send.length()) pos1 = string::npos;
+			}
+			time_t cur_time = time();
+			struct tm* tm_time = localtime(cur_time);
+			ostringstream output;
+			char conv_time[1024];
+			strftime(conv_time, 1024, "%b %d %Y %H:%M:%S", tm_time);
+			output << "\"" << conv_time << "\",pin" << pin << "," << reading;
+			string output_string = output.str();
+			ofstream ostr("/home/jrobert755/test.csv", ios_base::out | ios_base::app);
+			ostr << output_string.c_str() << endl;
+			ostr.close();
+		}
 		else if(where =="update") connection.sendMessage(Post, "/logger/current/update.php", to_send, output);
 		else continue;
 		cout << "Server: " << endl << output;
