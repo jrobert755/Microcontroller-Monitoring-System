@@ -188,9 +188,11 @@ int main(int argc, char *argv[])
 			string current_item;
 			int pin = 0;
 			double reading = 0;
+			cout << "Here" << endl;
 			while(pos1 != string::npos && pos1 < to_send.length()){
-				pos2 = to_send.find_first_of('&', pos1);
+				pos2 = to_send.find('&', pos1);
 				current_item = to_send.substr(pos1, pos2);
+				cout << "Current item: " << current_item.c_str() << endl;
 				if(current_item.compare(0, strlen("pin"), "pin") == 0){
 					sscanf(current_item.c_str(), "pin=%d", &pin);
 				} else if(current_item.compare(0, strlen("reading"), "reading") == 0){
@@ -199,6 +201,7 @@ int main(int argc, char *argv[])
 				pos1 = pos2 + 1;
 				if(pos1 >= to_send.length()) pos1 = string::npos;
 			}
+			cout << "Here2" << endl;
 			time_t cur_time = time(NULL);
 			struct tm* tm_time = localtime(&cur_time);
 			ostringstream output;
