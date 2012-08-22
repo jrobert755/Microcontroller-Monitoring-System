@@ -192,15 +192,15 @@ int main(int argc, char *argv[])
 				pos2 = to_send.find_first_of('&', pos1);
 				current_item = to_send.substr(pos1, pos2);
 				if(current_item.compare(0, strlen("pin"), "pin") == 0){
-					sscanf(current_item.c_str(), "pin=%lf", &pin);
+					sscanf(current_item.c_str(), "pin=%d", &pin);
 				} else if(current_item.compare(0, strlen("reading"), "reading") == 0){
-					sscanf(current_item.c_str(), "reading=%d", &reading);
+					sscanf(current_item.c_str(), "reading=%lf", &reading);
 				}
 				pos1 = pos2 + 1;
 				if(pos1 >= to_send.length()) pos1 = string::npos;
 			}
-			time_t cur_time = time();
-			struct tm* tm_time = localtime(cur_time);
+			time_t cur_time = time(NULL);
+			struct tm* tm_time = localtime(&cur_time);
 			ostringstream output;
 			char conv_time[1024];
 			strftime(conv_time, 1024, "%b %d %Y %H:%M:%S", tm_time);
